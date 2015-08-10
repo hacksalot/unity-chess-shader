@@ -1,3 +1,5 @@
 ChessShader.Unity/Library/
 ChessShader.Unity/Temp/
+ChessShader.Unity/*.sln
+ChessShader.Unity/*.csproj
 *.userprefs
