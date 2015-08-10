@@ -3,7 +3,11 @@ Sample chessboard shader #1 from the Unity manual.
 http://docs.unity3d.com/Manual/SL-VertexFragmentShaderExamples.html
 */
 
-Shader "Custom/TextureCoordinates/Chess" {
+Shader "Chess/Simple1" {
+    Properties
+    {
+      _Magnitude ("Magnitude", Float) = 8 // chessboard size
+    }
     SubShader {
         Pass {
             CGPROGRAM
@@ -11,6 +15,7 @@ Shader "Custom/TextureCoordinates/Chess" {
             #pragma fragment frag
 
             #include "UnityCG.cginc"
+            float _Magnitude; // chessboard size
 
             struct vertexInput {
                 float4 vertex : POSITION;
@@ -31,15 +36,15 @@ Shader "Custom/TextureCoordinates/Chess" {
 
             fixed4 frag(fragmentInput i) : SV_Target {
                 fixed4 color;
-                if ( fmod(i.texcoord0.x*8.0,2.0) < 1.0 ){
-                    if ( fmod(i.texcoord0.y*8.0,2.0) < 1.0 )
+                if ( fmod(i.texcoord0.x*_Magnitude,2.0) < 1.0 ){
+                    if ( fmod(i.texcoord0.y*_Magnitude,2.0) < 1.0 )
                     {
                         color = fixed4(1.0,1.0,1.0,1.0);
                     } else {
                         color = fixed4(0.0,0.0,0.0,1.0);
                     }
                 } else {
-                    if ( fmod(i.texcoord0.y*8.0,2.0) > 1.0 )
+                    if ( fmod(i.texcoord0.y*_Magnitude,2.0) > 1.0 )
                     {
                         color = fixed4(1.0,1.0,1.0,1.0);
                     } else {
